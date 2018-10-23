@@ -23,8 +23,6 @@ namespace SearchAThing
 	namespace Arduino
 	{
 
-		class RamData;
-
 		extern bool _DPrintInitialized;
 		// Initializes the debug output line.
 		// If DSERIAL_PRINT is defined then the serial with the SERIAL_SPEED
@@ -147,18 +145,7 @@ namespace SearchAThing
 		// Prints numerical value of first `len' bytes of the given buffer
 		// `buf' separating each number with the given separator `sep' char.
 		// Follows a newline.
-		void DPrintBytesln(const byte *buf, uint16_t len, char sep = '.');
-
-		// Prints numerical value of all bytes in the `data' if `len'==-1 or
-		// given `len'>=0 bytes separating each number with the given
-		// separator `sep' char.
-		void DPrintBytes(const RamData& data, int16_t len = -1, char sep = '.');
-
-		// Prints numerical value of all bytes in the `data' if `len'==-1 or
-		// given `len'>=0 bytes separating each number with the given
-		// separator `sep' char.
-		// Follows a newline.
-		void DPrintBytesln(const RamData& data, int16_t len = -1, char sep = '.');
+		void DPrintBytesln(const byte *buf, uint16_t len, char sep = '.');		
 
 		// Prints lowercase hexadecimal value of the given byte.
 		void DPrintHex(byte b);
@@ -196,18 +183,7 @@ namespace SearchAThing
 		// Prints lowercase hexadecimal value of the given `len' bytes buffer
 		// separating each with `sep' char.
 		// Follows a newline.
-		void DPrintHexBytesln(const byte *buf, uint16_t len, char sep = '-');
-
-		// Prints lowercase hexadecimal value of all bytes in the `data' if
-		// `len'==-1 or given `len'>=0 bytes separating each number with the
-		// given separator `sep' char.
-		void DPrintHexBytes(const RamData& data, int16_t len = -1, char sep = '-');
-
-		// Prints lowercase hexadecimal value of all bytes in the `data' if
-		// `len'==-1 or given `len'>=0 bytes separating each number with the
-		// given separator `sep' char.
-		// Follows a newline.
-		void DPrintHexBytesln(const RamData& data, int16_t len = -1, char sep = '-');
+		void DPrintHexBytesln(const byte *buf, uint16_t len, char sep = '-');		
 
 		// Prints lowercase hexdecimal value of `len' bytes of the given
 		// buffer in sequence (if `prettyPrint'==false) or in two column 8+8
@@ -218,14 +194,7 @@ namespace SearchAThing
 		// buffer in sequence (if `prettyPrint'==false) or in two column 8+8
 		// space separated and addressed (when `prettyPrint'==true).
 		// Follows a newline.
-		void DPrintHexln(const byte *buf, uint16_t len, bool prettyPrint = false);
-
-		// Print ramdata bytes content as chars.
-		void DPrint(const RamData& rd);
-
-		// Print ramdata bytes content as chars.
-		// Follows a newline.
-		void DPrintln(const RamData& rd);
+		void DPrintHexln(const byte *buf, uint16_t len, bool prettyPrint = false);		
 
 	}
 

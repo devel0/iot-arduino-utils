@@ -1,7 +1,6 @@
 #include "DebugMacros.h"
 
 #include "DPrint.h"
-#include "RamData.h"
 #include "Util.h"
 
 namespace SearchAThing
@@ -275,20 +274,7 @@ namespace SearchAThing
 			DPrintBytes(buf, len, sep); DNewline();
 		}
 
-		//--
-
-		void DPrintBytes(const RamData& data, int16_t len, char sep)
-		{
-			if (len == -1) len = data.Size();
-			DPrintBytes(data.ConstBuf(), len, sep);
-		}
-
-		void DPrintBytesln(const RamData& data, int16_t len, char sep)
-		{
-			DPrintBytes(data, len, sep); DNewline();
-		}
-
-		//--
+		//--		
 
 		void DPrintHex(byte b)
 		{
@@ -351,20 +337,6 @@ namespace SearchAThing
 
 		//--
 
-		void DPrintHexBytes(const RamData& data, int16_t len, char sep)
-		{
-			if (len == -1) len = data.Size();
-			DPrintHexBytes(data.ConstBuf(), len, sep);
-		}
-
-		void DPrintHexBytesln(const RamData& data, int16_t len, char sep)
-		{
-			DPrintHexBytes(data, len, sep);
-			DNewline();
-		}
-
-		//--
-
 		void DPrintHex(const byte *buf, uint16_t len, bool prettyPrint)
 		{
 			uint16_t i = 0;
@@ -394,17 +366,7 @@ namespace SearchAThing
 		{
 			DPrintHex(buf, len, prettyPrint); DNewline();
 		}
-
-		//--
-
-		void DPrint(const RamData& rd)
-		{
-			rd.PrintAsChars();
-		}
-
-		//--
 		
-		void DPrintln(const RamData& rd) { DPrint(rd); DNewline(); }
 	}
 
 }
