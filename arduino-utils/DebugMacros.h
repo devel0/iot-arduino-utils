@@ -1,13 +1,21 @@
 #ifndef _SEARCHATHING_ARDUINO_UTILS_DEBUG_MACROS_H
 #define _SEARCHATHING_ARDUINO_UTILS_DEBUG_MACROS_H
 
+//--------------------------------------------------
+
+// define here serial speed
+#define SERIAL_SPEED	57600
+
+// comment follow to disable serial debug
+//#define SEARCHATHING_DISABLE
+
+//--------------------------------------------------
+
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
 #include "WProgram.h"
 #endif
-
-#define SERIAL_SPEED	57600
 
 //===========================================================================
 // USER OVERRIDABLE MACROS
