@@ -21,10 +21,20 @@ ln -s <path>/iot-arduino-utils
 
 - edit [DebugMacros.h](arduino-utils/DebugMacros.h) to define `SERIAL_SPEED` or define `SEARCHATHING_DISABLE` to disable serial debugging
 
-
 ```c++
 #include <DPrint.h>
-#include <Util.h>
+using namespace SearchAThing::Arduino;
+
+void setup()
+{
+  DPrintln("serial debug");
+}
+
+void loop()
+{
+  DPrintln(millis());
+  delay(1000);
+}
 ```
 
 ## references
