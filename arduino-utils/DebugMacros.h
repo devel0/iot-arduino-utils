@@ -4,7 +4,7 @@
 //--------------------------------------------------
 
 // define here serial speed
-#define SERIAL_SPEED	57600
+#define SERIAL_SPEED	115200
 
 // comment follow to disable serial debug
 //#define SEARCHATHING_DISABLE
