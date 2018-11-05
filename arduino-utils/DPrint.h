@@ -200,6 +200,15 @@ void DPrintHex(const byte *buf, uint16_t len, bool prettyPrint = false);
 // Follows a newline.
 void DPrintHexln(const byte *buf, uint16_t len, bool prettyPrint = false);
 
+class DPrintCls : public Print
+{
+  public:
+    virtual size_t write(uint8_t c)
+    {
+        DPrint((char)c);
+    }
+};
+
 } // namespace Arduino
 
 } // namespace SearchAThing
