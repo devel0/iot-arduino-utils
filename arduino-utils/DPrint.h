@@ -205,12 +205,32 @@ class DPrintCls : public Print
   public:
     virtual size_t write(uint8_t c)
     {
+#ifdef DPRINT_SERIAL
         DPrint((char)c);
+#endif
     }
 };
 
 } // namespace Arduino
 
 } // namespace SearchAThing
+
+#ifndef DPRINT_SERIAL
+
+#define DNewline() ;
+#define DPrintln(x, ...) ;
+#define DPrint(x, ...) ;
+#define DPrintX(x, ...) ;
+#define DPrintXln(x, ...) ;
+#define DPrintBool(x, ...) ;
+#define DPrintBoolln(x, ...) ;
+#define DPrintBytes(x, ...) ;
+#define DPrintBytesln(x, ...) ;
+#define DPrintHex(x, ...) ;
+#define DPrintHexln(x, ...) ;
+#define DPrintHexBytes(x, ...) ;
+#define DPrintHexBytesln(x, ...) ;
+
+#endif
 
 #endif

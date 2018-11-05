@@ -3,6 +3,8 @@
 #include "DPrint.h"
 #include "Util.h"
 
+#ifdef DPRINT_SERIAL
+
 namespace SearchAThing
 {
 
@@ -468,3 +470,5 @@ void DPrintHexln(const byte *buf, uint16_t len, bool prettyPrint)
 } // namespace Arduino
 
 } // namespace SearchAThing
+
+#endif // DPRINT_SERIAL
