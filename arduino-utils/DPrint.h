@@ -18,9 +18,6 @@
 
 #endif
 
-#define DPrintInt(x) DPrint((int16_t)x);
-#define DPrintIntln(x) DPrintln((int16_t)x);
-
 namespace SearchAThing
 {
 
@@ -41,106 +38,104 @@ void DNewline();
 void DPrintln();
 
 // Prints a single char.
-void DPrint(char c);
+void DPrintChar(char c);
 
 // Prints a single char.
 // followed by a newline.
-void DPrintln(char c);
+void DPrintCharln(char c);
 
 // Prints given char for `cnt' times.
-void DPrintX(char c, uint16_t cnt);
+void DPrintCharX(char c, uint16_t cnt);
 
 // Prints given char for `cnt' times.
 // Follows a newline.
-void DPrintXln(char c, uint16_t cnt);
+void DPrintCharXln(char c, uint16_t cnt);
 
 // Prints numeric value of the given byte.
-void DPrint(byte b);
+void DPrintByte(byte b);
 
 // Prints numeric value of the given byte.
 // Follows a newline.
-void DPrintln(byte b);
+void DPrintByteln(byte b);
 
 // Prints numeric value (0,1) of the given boolean.
-void DPrint(bool b);
+void DPrintBool(bool b);
 
 // Prints numeric value (0,1) of the given boolean.
 // Follows a newline.
-void DPrintln(bool b);
+void DPrintBoolln(bool b);
 
 // Prints numeric value of the given unsigned 16bit integer.
-void DPrint(uint16_t x);
+void DPrintUInt16(uint16_t x);
 
 // Prints numeric value of the given unsigned 16bit integer.
 // Follows a newline.
-void DPrintln(uint16_t x);
+void DPrintUInt16ln(uint16_t x);
 
 // Prints numeric value of the given signed 16bit integer.
-void DPrint(int16_t v);
+void DPrintInt16(int16_t v);
 
 // Prints numeric value of the given signed 16bit integer.
 // Follows a newline.
-void DPrintln(int16_t v);
+void DPrintInt16ln(int16_t v);
 
 // Prints numeric value of the given unsigned 32bit integer.
-void DPrint(unsigned long v);
+void DPrintUInt32(uint32_t x);
 
 // Prints numeric value of the given unsigned 32bit integer.
 // Follows a newline.
-void DPrintln(unsigned long v);
+void DPrintUInt32ln(uint32_t x);
 
 // Prints numeric value of the given signed 32bit integer.
-void DPrint(signed long v);
+void DPrintInt32(int32_t v);
 
 // Prints numeric value of the given signed 32bit integer.
 // Follows a newline.
-void DPrintln(signed long v);
+void DPrintInt32ln(int32_t v);
+
+#define DPrintULong DPrintUInt32
+#define DPrintULongln DPrintUInt32ln
+#define DPrintLong DPrintInt32
+#define DPrintLongln DPrintInt32ln
 
 // Prints numeric value of the given float with specified precision.
-void DPrint(float v, int prec = 2);
+void DPrintFloat(float v, int prec = 2);
 
 // Prints numeric value of the given float with specified precision.
 // Follows a newline.
-void DPrintln(float v, int prec = 2);
+void DPrintFloatln(float v, int prec = 2);
 
 // Prints given flash string. Note: Use F("str") to pass argument.
-void DPrint(const __FlashStringHelper *str);
+void DPrintF(const __FlashStringHelper *str);
 
 // Prints given flash string. Follows a newline.
 // Note: Use F("str") to pass argument.
-void DPrintln(const __FlashStringHelper *str);
+void DPrintFln(const __FlashStringHelper *str);
 
 // Prints given string of chars until leading null char excluded.
-void DPrint(const char *str);
+void DPrintStr(const char *str);
 
 // Prints given string of chars until leading null char excluded.
 // Follows a newline.
-void DPrintln(const char *str);
+void DPrintStrln(const char *str);
 
 // Prints given array of char for the given size.
 // Useful when a leading null char isn't available.
-void DPrint(const char *str, int size);
+void DPrintStrn(const char *str, int size);
 
 // Prints given array of char for the given size.
 // Useful when a leading null char isn't available.
 // Follows a newline.
-void DPrintln(const char *str, int size);
+void DPrintStrnln(const char *str, int size);
 
 // Prints `size' chars from the given flash string.
 // Note: Use F("str") to pass the argument.
-void DPrint(const __FlashStringHelper *str, int size);
+void DPrintFn(const __FlashStringHelper *str, int size);
 
 // Prints `size' chars from the given flash string.
 // Note: Use F("str") to pass the argument.
 // Follows a newline.
-void DPrintln(const __FlashStringHelper *str, int size);
-
-// Prints '0' if the given numeric value is 0 and `1' otherwise.
-void DPrintBool(int v);
-
-// Prints '0' if the given numeric value is 0 and `1' otherwise.
-// Follows a newline.
-void DPrintBoolln(int v);
+void DPrintFnln(const __FlashStringHelper *str, int size);
 
 // Prints numerical value of first `len' bytes of the given buffer
 // `buf' separating each number with the given separator `sep' char.
@@ -206,7 +201,7 @@ class DPrintCls : public Print
     virtual size_t write(uint8_t c)
     {
 #ifdef DPRINT_SERIAL
-        DPrint((char)c);
+        DPrintChar(c);
 #endif
     }
 };
@@ -218,18 +213,51 @@ class DPrintCls : public Print
 #ifndef DPRINT_SERIAL
 
 #define DNewline() ;
-#define DPrintln(x, ...) ;
-#define DPrint(x, ...) ;
-#define DPrintX(x, ...) ;
-#define DPrintXln(x, ...) ;
+#define DPrintln() ;
+#define DPrintChar(x, ...) ;
+#define DPrintCharln(x, ...) ;
+#define DPrintCharX(x, ...) ;
+#define DPrintCharXln(x, ...) ;
+#define DPrintByte(x, ...) ;
+#define DPrintByteln(x, ...) ;
+#define DPrintBool(x, ...) ;
+#define DPrintBoolln(x, ...) ;
+#define DPrintUInt16(x, ...) ;
+#define DPrintUInt16ln(x, ...) ;
+#define DPrintInt16(x, ...) ;
+#define DPrintInt16ln(x, ...) ;
+#define DPrintUInt32(x, ...) ;
+#define DPrintUInt32ln(x, ...) ;
+#define DPrintInt32(x, ...) ;
+#define DPrintInt32ln(x, ...) ;
+#define DPrintULong(x, ...) ;
+#define DPrintULongln(x, ...) ;
+#define DPrintLong(x, ...) ;
+#define DPrintLongln(x, ...) ;
+#define DPrintFloat(x, ...) ;
+#define DPrintFloatln(x, ...) ;
+#define DPrintF(x, ...) ;
+#define DPrintFln(x, ...) ;
+#define DPrintStr(x, ...) ;
+#define DPrintStrln(x, ...) ;
+#define DPrintStrn(x, ...) ;
+#define DPrintStrnln(x, ...) ;
+#define DPrintFn(x, ...) ;
+#define DPrintFnln(x, ...) ;
 #define DPrintBool(x, ...) ;
 #define DPrintBoolln(x, ...) ;
 #define DPrintBytes(x, ...) ;
 #define DPrintBytesln(x, ...) ;
 #define DPrintHex(x, ...) ;
 #define DPrintHexln(x, ...) ;
+#define DPrintHex(x, ...) ;
+#define DPrintHexln(x, ...) ;
+#define DPrintHex(x, ...) ;
+#define DPrintHexln(x, ...) ;
 #define DPrintHexBytes(x, ...) ;
 #define DPrintHexBytesln(x, ...) ;
+#define DPrintHex(x, ...) ;
+#define DPrintHexln(x, ...) ;
 
 #endif
 

@@ -98,151 +98,145 @@ void _DPrintInit()
 
 void DNewline()
 {
-	DPrint((char)10);
+	DPrintChar(10);
 }
 
-void DPrintln() { DPrint((char)10); }
+void DPrintln() { DPrintChar(10); }
 
 //--
 
-void DPrint(char c)
+void DPrintChar(char c)
 {
 	_DPrintInit();
 	_DPutc(c);
 }
 
-void DPrintln(char c)
+void DPrintCharln(char c)
 {
-	DPrint(c);
+	DPrintChar(c);
 	DNewline();
 }
 
 //--
 
-void DPrintX(char c, uint16_t cnt)
+void DPrintCharX(char c, uint16_t cnt)
 {
 	_DPrintInit();
 	while (cnt--)
 		_DPutc(c);
 }
 
-void DPrintXln(char c, uint16_t cnt)
+void DPrintCharXln(char c, uint16_t cnt)
 {
-	DPrintX(c, cnt);
+	DPrintCharX(c, cnt);
 	DNewline();
 }
 
 //--
 
-void DPrint(byte b)
+void DPrintByte(byte b)
 {
-	char buf[4];
-	itoa(b, buf, 10);
-	DPrint(buf);
+	DPrintInt16((int)b);
 }
 
-void DPrintln(byte b)
+void DPrintByteln(byte b)
 {
-	DPrint(b);
+	DPrintByte(b);
 	DNewline();
 }
 
 //--
 
-void DPrint(bool b) { DPrint(b ? '1' : '0'); }
+void DPrintBool(bool b) { DPrintChar(b ? '1' : '0'); }
 
-void DPrintln(bool b)
+void DPrintBoolln(bool b)
 {
-	DPrint(b);
+	DPrintBool(b);
 	DNewline();
 }
 
 //--
 
-void DPrint(uint16_t x)
+void DPrintUInt16(uint16_t x)
 {
 	char buf[6];
 	utoa(x, buf, 10);
-	DPrint(buf);
+	DPrintStr(buf);
 }
 
-void DPrintln(uint16_t x)
+void DPrintUInt16ln(uint16_t x)
 {
-	DPrint(x);
+	DPrintUInt16(x);
 	DNewline();
 }
 
 //--
 
-void DPrint(int16_t v)
+void DPrintInt16(int16_t v)
 {
 	char buf[7];
 	itoa(v, buf, 10);
-	DPrint(buf);
+	DPrintStr(buf);
 }
 
-void DPrintln(int16_t v)
+void DPrintInt16ln(int16_t v)
 {
-	DPrint(v);
+	DPrintInt16(v);
 	DNewline();
 }
 
 //--
 
-void DPrint(unsigned long v)
-{
-	char buf[10];
-	ultoa(v, buf, 10);
-	DPrint(buf);
-}
-
-//--
-
-void DPrintln(unsigned long v)
-{
-	DPrint(v);
-	DNewline();
-}
-
-//--
-
-void DPrint(signed long v)
+void DPrintUInt32(uint32_t x)
 {
 	char buf[11];
-	ltoa(v, buf, 10);
-	DPrint(buf);
+	ultoa(x, buf, 10);
+	DPrintStr(buf);
 }
 
-//--
-
-void DPrintln(signed long v)
+void DPrintUInt32ln(uint32_t x)
 {
-	DPrint(v);
+	DPrintUInt32(x);
 	DNewline();
 }
 
 //--
 
-void DPrint(float v, int prec)
+void DPrintInt32(int32_t v)
+{
+	char buf[12];
+	ltoa(v, buf, 10);
+	DPrintStr(buf);
+}
+
+void DPrintInt32ln(int32_t v)
+{
+	DPrintInt32(v);
+	DNewline();
+}
+
+//--
+
+void DPrintFloat(float v, int prec)
 {
 	char buf[20];
 
 	FloatToString(buf, v, prec);
 
-	DPrint(buf);
+	DPrintStr(buf);
 }
 
 //--
 
-void DPrintln(float v, int prec)
+void DPrintFloatln(float v, int prec)
 {
-	DPrint(v);
+	DPrintFloat(v);
 	DNewline();
 }
 
 //--
 
-void DPrint(const __FlashStringHelper *str)
+void DPrintF(const __FlashStringHelper *str)
 {
 	_DPrintInit();
 
@@ -256,15 +250,15 @@ void DPrint(const __FlashStringHelper *str)
 	}
 }
 
-void DPrintln(const __FlashStringHelper *str)
+void DPrintFln(const __FlashStringHelper *str)
 {
-	DPrint(str);
+	DPrintF(str);
 	DNewline();
 }
 
 //--
 
-void DPrint(const char *str)
+void DPrintStr(const char *str)
 {
 	_DPrintInit();
 
@@ -275,15 +269,15 @@ void DPrint(const char *str)
 	}
 }
 
-void DPrintln(const char *str)
+void DPrintStrln(const char *str)
 {
-	DPrint(str);
+	DPrintStr(str);
 	DNewline();
 }
 
 //--
 
-void DPrint(const char *str, int size)
+void DPrintStrn(const char *str, int size)
 {
 	_DPrintInit();
 
@@ -295,15 +289,15 @@ void DPrint(const char *str, int size)
 	}
 }
 
-void DPrintln(const char *str, int size)
+void DPrintStrnln(const char *str, int size)
 {
-	DPrint(str, size);
+	DPrintStrn(str, size);
 	DNewline();
 }
 
 //--
 
-void DPrint(const __FlashStringHelper *str, int size)
+void DPrintFn(const __FlashStringHelper *str, int size)
 {
 	_DPrintInit();
 
@@ -317,22 +311,9 @@ void DPrint(const __FlashStringHelper *str, int size)
 	}
 }
 
-void DPrintln(const __FlashStringHelper *str, int size)
+void DPrintFnln(const __FlashStringHelper *str, int size)
 {
-	DPrint(str, size);
-	DNewline();
-}
-
-//--
-
-void DPrintBool(int v)
-{
-	DPrint(v ? true : false);
-}
-
-void DPrintBoolln(int v)
-{
-	DPrintBool(v);
+	DPrintFn(str, size);
 	DNewline();
 }
 
@@ -344,7 +325,7 @@ void DPrintBytes(const byte *buf, uint16_t len, char sep)
 
 	while (len > 0)
 	{
-		DPrint(*buf);
+		DPrintByte(*buf);
 		if (len != 1)
 			_DPutc(sep);
 
@@ -366,8 +347,8 @@ void DPrintHex(byte b)
 	char str[3];
 	itoa(b, str, HEX);
 	if (str[1] == 0)
-		DPrint('0');
-	DPrint(str);
+		DPrintChar('0');
+	DPrintStr(str);
 }
 
 void DPrintHexln(byte b)
@@ -381,7 +362,7 @@ void DPrintHexln(byte b)
 void DPrintHex(uint16_t v, bool prefix)
 {
 	if (prefix)
-		DPrint(F("0x"));
+		DPrintF(F("0x"));
 	DPrintHex(highByte(v));
 	DPrintHex(lowByte(v));
 }
@@ -397,7 +378,7 @@ void DPrintHexln(uint16_t v, bool prefix)
 void DPrintHex(unsigned long v, bool prefix)
 {
 	if (prefix)
-		DPrint(F("0x"));
+		DPrintF(F("0x"));
 	DPrintHex((byte)((v >> 24) & 0xff));
 	DPrintHex((byte)((v >> 16) & 0xff));
 	DPrintHex((byte)((v >> 8) & 0xff));
@@ -421,7 +402,7 @@ void DPrintHexBytes(const byte *buf, uint16_t len, char sep)
 		--len;
 
 		if (len > 0)
-			DPrint(sep);
+			DPrintChar(sep);
 	}
 }
 
@@ -443,14 +424,14 @@ void DPrintHex(const byte *buf, uint16_t len, bool prettyPrint)
 			if (i > 0)
 				DNewline();
 			DPrintHex(i);
-			DPrint(F(": "));
+			DPrintF(F(": "));
 		}
 
 		if (prettyPrint)
 		{
-			DPrint(' ');
+			DPrintChar(' ');
 			if (i % 8 == 0)
-				DPrint(' ');
+				DPrintChar(' ');
 		}
 
 		DPrintHex(*buf);

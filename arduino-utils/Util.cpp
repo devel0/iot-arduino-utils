@@ -97,8 +97,8 @@ namespace SearchAThing
 
 		void PrintFreeMemory()
 		{
-			DPrint(F("free blk=")); DPrint(FreeMemoryMaxBlock());
-			DPrint(F(" frg=")); DPrintln(FreeMemorySum());
+			DPrintF(F("free blk=")); DPrintInt16(FreeMemoryMaxBlock());
+			DPrintF(F(" frg=")); DPrintInt16ln(FreeMemorySum());
 		}
 
 		// http://www.nongnu.org/avr-libc/user-manual/malloc.html
@@ -108,44 +108,44 @@ namespace SearchAThing
 
 			void *myCurStack = &stack;
 
-			DPrintln(F("RAM LAYOUT"));
-			DPrintXln('-', 20);
-			DPrint(F("__malloc_margin\t\t")); DPrintln(__malloc_margin);
+			DPrintFln(F("RAM LAYOUT"));
+			DPrintCharXln('-', 20);
+			DPrintF(F("__malloc_margin\t\t")); DPrintUInt32ln(__malloc_margin);
 
 			DNewline();
-			DPrint(F("__data_start\t\t")); DPrintHexln((size_t)&__data_start, true);
-			DPrint(F("__data_end\t\t")); DPrintHexln((size_t)&__data_end, true);
+			DPrintF(F("__data_start\t\t")); DPrintHexln((size_t)&__data_start, true);
+			DPrintF(F("__data_end\t\t")); DPrintHexln((size_t)&__data_end, true);
 
 			DNewline();
-			DPrint(F("__bss_start\t\t")); DPrintHexln((size_t)&__bss_start, true);
-			DPrint(F("__bss_end\t\t")); DPrintHexln((size_t)&__bss_end, true);
+			DPrintF(F("__bss_start\t\t")); DPrintHexln((size_t)&__bss_start, true);
+			DPrintF(F("__bss_end\t\t")); DPrintHexln((size_t)&__bss_end, true);
 
 			DNewline();
-			DPrint(F("__malloc_heap_start\t")); DPrintHexln((size_t)__malloc_heap_start, true);
-			DPrint(F("__heap_start\t\t")); DPrintHexln((size_t)&__heap_start, true);
-			DPrint(F("__brkval\t\t")); DPrintHexln((size_t)__brkval, true);
-			DPrint(F("SP - __malloc_margin\t")); DPrintHexln((SP - __malloc_margin), true);
+			DPrintF(F("__malloc_heap_start\t")); DPrintHexln((size_t)__malloc_heap_start, true);
+			DPrintF(F("__heap_start\t\t")); DPrintHexln((size_t)&__heap_start, true);
+			DPrintF(F("__brkval\t\t")); DPrintHexln((size_t)__brkval, true);
+			DPrintF(F("SP - __malloc_margin\t")); DPrintHexln((SP - __malloc_margin), true);
 
 			DNewline();
-			DPrint(F("SP\t\t\t")); DPrintHexln(SP, true);
-			DPrint(F("myCurStack\t\t")); DPrintHexln((uint16_t)&myCurStack, true);
-			DPrint(F("RAMEND\t\t\t")); DPrintHexln((uint16_t)RAMEND, true);
+			DPrintF(F("SP\t\t\t")); DPrintHexln(SP, true);
+			DPrintF(F("myCurStack\t\t")); DPrintHexln((uint16_t)&myCurStack, true);
+			DPrintF(F("RAMEND\t\t\t")); DPrintHexln((uint16_t)RAMEND, true);
 
 			// Free List
 
 			DNewline();
-			DPrintln(F("FREE LIST"));
-			DPrintXln('-', 20);
+			DPrintFln(F("FREE LIST"));
+			DPrintCharXln('-', 20);
 			struct __freelist *fp = __flp;
 
-			DPrint(F("__flp\t\t\t")); DPrintHexln((size_t)__flp, true);
+			DPrintF(F("__flp\t\t\t")); DPrintHexln((size_t)__flp, true);
 			DNewline();
 
 			while (fp != NULL)
 			{
-				DPrint(F("fp=")); DPrintHex((size_t)fp, true);
-				DPrint(F(" sz=")); DPrint(fp->sz);
-				DPrint(F(" nx=")); DPrintHexln((size_t)fp->nx, true);
+				DPrintF(F("fp=")); DPrintHex((size_t)fp, true);
+				DPrintF(F(" sz=")); DPrintUInt32(fp->sz);
+				DPrintF(F(" nx=")); DPrintHexln((size_t)fp->nx, true);
 
 				fp = fp->nx;
 			}
