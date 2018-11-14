@@ -25,9 +25,14 @@ void _DPrintInit()
 		return;
 
 #if defined(__AVR_ATmega8__)
-	// Table 62
-	#define UBRRH_VALUE 0
-	#define UBRRL_VALUE 3
+
+#if SERIAL_SPEED != 57600
+#error "please set to 57600 baud for atmega8"
+#endif
+
+// 115k
+#define UBRRH_VALUE 0
+#define UBRRL_VALUE 8
 
 	// Sets baud rate to SERIAL_SPEED
 	// using values computed by inclusion of <util/setbaud.h>
